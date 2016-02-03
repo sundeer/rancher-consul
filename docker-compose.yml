@@ -1,0 +1,47 @@
+consul-1:
+  image: gliderlabs/consul-server:0.6
+  hostname: consul-1
+  ports:
+    - 8500:8500
+  volumes:
+    - /data
+  command: '-advertise 10.42.16.1 -bootstrap-expect 3'
+  labels:
+    io.rancher.container.requested_ip: 10.42.16.1
+
+consul-2:
+  image: gliderlabs/consul-server:0.6
+  hostname: consul-2
+  volumes:
+    - /data
+  command: '-advertise 10.42.16.2 -join consul-1'
+  labels:
+    io.rancher.container.requested_ip: 10.42.16.2
+
+consul-3:
+  image: gliderlabs/consul-server:0.6
+  hostname: consul-3
+  volumes:
+    - /data
+  command: '-advertise 10.42.16.3 -join consul-1'
+  labels:
+    io.rancher.container.requested_ip: 10.42.16.3
+
+consul-ui:
+  image: gliderlabs/consul-agent:0.6
+  hostname: consul-4
+  ports:
+    - 8500:8500
+  volumes:
+    - /data
+  command: '-join 10.42.16.1'
+  labels:
+    io.rancher.container.requested_ip: 10.42.16.4
+
+vault:
+  image: sundeer/rancher-vault:latest
+  ports:
+    - 8200:8200
+  cap_add:
+    - IPC_LOCK
+  command: 'server -config=/config/consul.hcl'
