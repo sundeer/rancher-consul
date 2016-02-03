@@ -27,7 +27,7 @@ consul-3:
 
 consul-ui:
   image: sundeer/rancher-consul:latest
-  hostname: consul-4
+  hostname: consul-ui
   ports:
     - 8500:8500
   volumes:
