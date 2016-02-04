@@ -1,45 +1,28 @@
-consul-1:
+lb:
+  image: rancher/load-balancer-service
+  expose:
+    - 8500:8500/tcp
+  tty: true
+  stdin_open: true
+  links:
+    - server-1:server-1
+    - server-2:server-2
+    - server-3:server-3
+
+server-1:
   image: sundeer/rancher-consul:latest
-  hostname: consul-1
-  volumes:
-    - /data
   command: '-server -config-file /config/server.json -advertise 10.42.16.1 -bootstrap-expect 3'
   labels:
     io.rancher.container.requested_ip: 10.42.16.1
 
-consul-2:
+server-2:
   image: sundeer/rancher-consul:latest
-  hostname: consul-2
-  volumes:
-    - /data
-  command: '-server -config-file /config/server.json -advertise 10.42.16.2 -join consul-1'
+  command: '-server -config-file /config/server.json -advertise 10.42.16.2 -join server-1'
   labels:
     io.rancher.container.requested_ip: 10.42.16.2
 
-consul-3:
+server-3:
   image: sundeer/rancher-consul:latest
-  hostname: consul-3
-  volumes:
-    - /data
-  command: '-server -config-file /config/server.json -advertise 10.42.16.3 -join consul-1'
+  command: '-server -config-file /config/server.json -advertise 10.42.16.3 -join server-1'
   labels:
     io.rancher.container.requested_ip: 10.42.16.3
-
-consul-ui:
-  image: sundeer/rancher-consul:latest
-  hostname: consul-ui
-  ports:
-    - 8500:8500
-  volumes:
-    - /data
-  command: '-config-file /config/client.json -join 10.42.16.1'
-  labels:
-    io.rancher.container.requested_ip: 10.42.16.4
-
-vault:
-  image: sundeer/rancher-vault:latest
-  ports:
-    - 8200:8200
-  cap_add:
-    - IPC_LOCK
-  command: 'server -config=/config/consul.hcl'
