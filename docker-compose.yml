@@ -11,18 +11,24 @@ lb:
 
 server-1:
   image: sundeer/rancher-consul:latest
-  command: '-server -config-file /config/server.json -advertise 10.42.16.1 -bootstrap-expect 3'
+  command: '-config-file /config/server.json -advertise 10.42.16.1'
   labels:
     io.rancher.container.requested_ip: 10.42.16.1
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
 
 server-2:
   image: sundeer/rancher-consul:latest
-  command: '-server -config-file /config/server.json -advertise 10.42.16.2 -join server-1'
+  command: '-config-file /config/server.json -advertise 10.42.16.2'
   labels:
     io.rancher.container.requested_ip: 10.42.16.2
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
 
 server-3:
   image: sundeer/rancher-consul:latest
-  command: '-server -config-file /config/server.json -advertise 10.42.16.3 -join server-1'
+  command: '-config-file /config/server.json -advertise 10.42.16.3'
   labels:
     io.rancher.container.requested_ip: 10.42.16.3
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.container.hostname_override: container_name
