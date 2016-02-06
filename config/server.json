@@ -3,6 +3,7 @@
 	"client_addr": "0.0.0.0",
 	"data_dir": "/data",
 	"leave_on_terminate": true,
+	"server": true,
 	"start_join": [
 		"server-1",
 		"server-2",
