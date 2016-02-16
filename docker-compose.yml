@@ -1,14 +1,21 @@
+# lb:
+#   image: rancher/load-balancer-service
+#   expose:
+#     - 8500:8500/tcp
+#     - 8500:8500/udp
+#   tty: true
+#   stdin_open: true
+#   links:
+#     - server-1:server-1
+#     - server-2:server-2
+#     - server-3:server-3
+
 lb:
-  image: rancher/load-balancer-service
+  image: sundeer/rancher-haproxy-vault:feature_consul
   expose:
-    - 8500:8500/tcp
-    - 8500:8500/udp
-  tty: true
-  stdin_open: true
-  links:
-    - server-1:server-1
-    - server-2:server-2
-    - server-3:server-3
+    - 8500
+  labels:
+    io.rancher.container.hostname_override: container_name
 
 server-1:
   image: sundeer/docker-consul:feature_test
