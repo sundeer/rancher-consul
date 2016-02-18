@@ -10,12 +10,18 @@
 #     - server-2:server-2
 #     - server-3:server-3
 
-lb:
-  image: sundeer/rancher-haproxy-vault:feature_consul
-  expose:
-    - 8500
-  labels:
-    io.rancher.container.hostname_override: container_name
+# lb:
+#   image: sundeer/rancher-haproxy-vault:feature_consul
+#   expose:
+#     - 8500
+#   labels:
+#     io.rancher.container.hostname_override: container_name
+consul:
+  image: rancher/dns-service
+  links:
+  - server-1:server-1
+  - server-2:server-2
+  - server-3:server-3
 
 server-1:
   image: sundeer/docker-consul:feature_test
