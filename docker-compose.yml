@@ -29,7 +29,6 @@ server-1:
   labels:
     io.rancher.container.requested_ip: 10.42.16.1
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label: ephemeral=false
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-2
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-3
 
@@ -39,7 +38,6 @@ server-2:
   labels:
     io.rancher.container.requested_ip: 10.42.16.2
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label: ephemeral=true
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-1
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-3
 
@@ -49,6 +47,5 @@ server-3:
   labels:
     io.rancher.container.requested_ip: 10.42.16.3
     io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label: ephemeral=true
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-2
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-3
