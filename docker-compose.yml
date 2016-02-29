@@ -1,16 +1,30 @@
-lb:
-  image: rancher/load-balancer-service
-  expose:
-    - 8500:8500/tcp
-  tty: true
-  stdin_open: true
+# lb:
+#   image: rancher/load-balancer-service
+#   expose:
+#     - 8500:8500/tcp
+#     - 8500:8500/udp
+#   tty: true
+#   stdin_open: true
+#   links:
+#     - server-1:server-1
+#     - server-2:server-2
+#     - server-3:server-3
+
+# lb:
+#   image: sundeer/rancher-haproxy-vault:feature_consul
+#   expose:
+#     - 8500
+#   labels:
+#     io.rancher.container.hostname_override: container_name
+consul:
+  image: rancher/dns-service
   links:
-    - server-1:server-1
-    - server-2:server-2
-    - server-3:server-3
+  - server-1:server-1
+  - server-2:server-2
+  - server-3:server-3
 
 server-1:
-  image: sundeer/rancher-consul:latest
+  image: sundeer/docker-consul:latest
   command: '-config-file /config/server.json -advertise 10.42.16.1'
   labels:
     io.rancher.container.requested_ip: 10.42.16.1
@@ -20,7 +34,7 @@ server-1:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-3
 
 server-2:
-  image: sundeer/rancher-consul:latest
+  image: sundeer/docker-consul:latest
   command: '-config-file /config/server.json -advertise 10.42.16.2'
   labels:
     io.rancher.container.requested_ip: 10.42.16.2
@@ -30,7 +44,7 @@ server-2:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-3
 
 server-3:
-  image: sundeer/rancher-consul:latest
+  image: sundeer/docker-consul:latest
   command: '-config-file /config/server.json -advertise 10.42.16.3'
   labels:
     io.rancher.container.requested_ip: 10.42.16.3
