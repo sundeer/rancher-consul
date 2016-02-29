@@ -24,7 +24,7 @@ consul:
   - server-3:server-3
 
 server-1:
-  image: sundeer/docker-consul:feature_test
+  image: sundeer/docker-consul:latest
   command: '-config-file /config/server.json -advertise 10.42.16.1'
   labels:
     io.rancher.container.requested_ip: 10.42.16.1
@@ -34,7 +34,7 @@ server-1:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-3
 
 server-2:
-  image: sundeer/docker-consul:feature_test
+  image: sundeer/docker-consul:latest
   command: '-config-file /config/server.json -advertise 10.42.16.2'
   labels:
     io.rancher.container.requested_ip: 10.42.16.2
@@ -44,7 +44,7 @@ server-2:
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/server-3
 
 server-3:
-  image: sundeer/docker-consul:feature_test
+  image: sundeer/docker-consul:latest
   command: '-config-file /config/server.json -advertise 10.42.16.3'
   labels:
     io.rancher.container.requested_ip: 10.42.16.3
