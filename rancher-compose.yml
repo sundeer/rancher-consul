@@ -1,4 +1,4 @@
-consul:
+server:
   scale: 3
   metadata:
     ca.crt: ${ca_crt}

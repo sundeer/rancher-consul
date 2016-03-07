@@ -1,15 +1,15 @@
-consul-conf:
+config:
   image: sundeer/docker-consul-config:feature_test
   labels:
     io.rancher.container.hostname_override: container_name
   volumes_from:
-    - consul
-  net: "container:consul"
+    - server
+  net: "container:server"
 
-consul:
+server:
   image: sundeer/docker-consul-server:feature_test
   labels:
-    io.rancher.sidekicks: consul-conf
+    io.rancher.sidekicks: config
   volumes:
     - /opt/rancher/ssl
     - /opt/rancher/config
