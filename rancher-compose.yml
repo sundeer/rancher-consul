@@ -1,0 +1,11 @@
+consul:
+  scale: 3
+  metadata:
+    ca.crt: ${ca_crt}
+    consul1.crt: ${consul1_crt}
+    consul1.key: ${consul1_key}
+    consul2.crt: ${consul2_crt}
+    consul2.key: ${consul2_key}
+    consul3.crt: ${consul3_crt}
+    consul3.key: ${consul3_key}
+    enc.key: "${gossip_key}"
