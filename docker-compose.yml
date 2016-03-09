@@ -1,3 +1,8 @@
+consul:
+  image: rancher/dns-service
+  links:
+  - server:server
+  
 server:
   image: sundeer/docker-consul-server:feature_test
   labels:
@@ -7,7 +12,7 @@ server:
     - /opt/rancher/ssl
     - /opt/rancher/config
     - /var/consul
-    
+
 config:
   image: sundeer/docker-consul-config:feature_refactor
   labels:
