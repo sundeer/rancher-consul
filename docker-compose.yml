@@ -2,16 +2,14 @@ consul:
   image: rancher/dns-service
   links:
   - server:server
-  
+
 server:
   image: sundeer/docker-consul-server:feature_test
   labels:
     io.rancher.sidekicks: config
     io.rancher.container.hostname_override: container_name
   volumes:
-    - /opt/rancher/ssl
-    - /opt/rancher/config
-    - /var/consul
+    - /app/config
 
 config:
   image: sundeer/docker-consul-config:feature_refactor
