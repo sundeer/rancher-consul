@@ -16,7 +16,7 @@ config:
   image: sundeer/docker-consul-config:latest
   environment:
     CA_CRT:
-    CONSUL1_CRT:
+    CONSUL_CRT:
     CONSUL_KEY:
     ENC_KEY:
   labels:
