@@ -4,7 +4,8 @@ consul:
   - server:server
 
 server:
-  image: sundeer/docker-consul-server:feature_test
+  image: sundeer/docker-consul-server:feature_use-hc-dockerfile
+  command: server -bind=0.0.0.0
   labels:
     io.rancher.sidekicks: config
     io.rancher.container.hostname_override: container_name
