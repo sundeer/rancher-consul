@@ -4,7 +4,7 @@ consul:
   - server:server
 
 server:
-  image: sundeer/docker-consul-server:feature_use-hc-dockerfile
+  image: sundeer/docker-consul-server:latest
   command: server -bind=0.0.0.0
   labels:
     io.rancher.sidekicks: config
@@ -13,7 +13,7 @@ server:
     - /app/config
 
 config:
-  image: sundeer/docker-consul-config:feature_refactor
+  image: sundeer/docker-consul-config:latest
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
