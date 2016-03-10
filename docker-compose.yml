@@ -5,7 +5,7 @@ consul:
 
 server:
   image: sundeer/docker-consul-server:latest
-  command: server -bind=0.0.0.0
+  command: server
   labels:
     io.rancher.sidekicks: config
     io.rancher.container.hostname_override: container_name
@@ -13,7 +13,7 @@ server:
     - /app/config
 
 config:
-  image: sundeer/docker-consul-config:latest
+  image: sundeer/docker-consul-config:feature_env-secrets
   environment:
     CA_CRT:
     CONSUL_CRT:
