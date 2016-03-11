@@ -13,7 +13,7 @@ server:
     - /app/config
 
 config:
-  image: sundeer/docker-consul-config:feature_env-secrets
+  image: sundeer/docker-consul-config:latest
   environment:
     CA_CRT: $CA_CRT
     CONSUL_CRT: $CONSUL_CRT
