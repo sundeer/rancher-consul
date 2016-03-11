@@ -15,10 +15,10 @@ server:
 config:
   image: sundeer/docker-consul-config:feature_env-secrets
   environment:
-    CA_CRT:
-    CONSUL_CRT:
-    CONSUL_KEY:
-    ENC_KEY:
+    CA_CRT: $CA_CRT
+    CONSUL_CRT: $CONSUL_CRT
+    CONSUL_KEY: $CONSUL_KEY
+    ENC_KEY: $ENC_KEY
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
